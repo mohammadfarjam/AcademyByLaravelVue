@@ -1,6 +1,6 @@
 import Home from './components/Home';
 import About from './components/About';
-import Navbar from './components/Navbar';
+import details from './components/Toturial_details';
 
 
 export default {
@@ -12,6 +12,9 @@ export default {
         },
         {
             path: '/about', component: About,
+        },
+        {
+            path: '/details', component:details,
         },
 
     ]

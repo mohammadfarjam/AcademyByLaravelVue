@@ -15,19 +15,29 @@
                         <router-link to="/about" class="nav-link">درباره ما</router-link>
                     </li>
                 </ul>
-<!--                <p>{{ user.name }}</p>-->
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/login" class="btn nav-link text-light ml-3">ورود</a></li>
-                    <li><a href="/register" class="btn btn-outline-info nav-link custom_btn text-light">ثبت نام</a></li>
-                    <li><a href="/logout" class="btn btn-outline-info nav-link custom_btn text-light"
-                        onclick="event.preventDefault();
+
+
+                <div v-if="user_info" class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user_info.name }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a href="/logout" class="dropdown-item btn btn-outline-info nav-link custom_btn text-dark" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
-                        خروج
+                            خروج
                         </a>
                         <form id="logout-form" action="/logout" method="POST" style="display: none;">
                             <input type="hidden" name="_token" v-bind:value="csrf">
                         </form>
-                    </li>
+                    </div>
+                </div>
+
+
+
+                <ul v-if="!user_info" class="nav navbar-nav navbar-right">
+                    <li><a href="/login" class="btn btn-outline-info nav-link text-light ml-3">ورود</a></li>
+                    <li><a href="/register" class="btn btn-outline-info nav-link custom_btn text-light">ثبت نام</a></li>
+
                 </ul>
             </div>
         </nav>
@@ -45,12 +55,10 @@ export default {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         }
     },
-    props : ['userInfo'],
+    props : ['user_info'],
 
-    mounted() {
-        console.log(this.userInfo);
-    }
 
 
 }
 </script>
+

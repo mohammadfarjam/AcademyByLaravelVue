@@ -1,0 +1,22 @@
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    src: url('../font/IRANSansWeb(FaNum).ttf') format('truetype');
+}
+.font{
+    font-family: IRANSans;
+}
+body {
+    min-height: 100vh;
+    width: 100%;
+    font-family: IRANSans;
+}
+.add_card{
+    position: absolute;
+    bottom: 0;
+    width: 55%;
+    right: 0;
+    left: 0;
+    margin: auto;
+;
+}

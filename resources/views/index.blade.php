@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     @if(\Illuminate\Support\Facades\Auth::check())
-        <navbar :userInfo="{{\Illuminate\Support\Facades\Auth::user()}}"></navbar>
+        <navbar :user_info="{{\Illuminate\Support\Facades\Auth::user()}}"></navbar>
     @else
         <navbar></navbar>
     @endif
