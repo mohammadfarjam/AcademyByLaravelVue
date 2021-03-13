@@ -1,9 +1,6 @@
 <template>
     <div>
-
-        <h1>hhh</h1>
-
-
+        <h2>About page</h2>
     </div>
 </template>
 
