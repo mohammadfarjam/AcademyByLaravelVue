@@ -1,6 +1,7 @@
 import Home from './components/Home';
 import About from './components/About';
 import details from './components/Toturial_details';
+import Add from "./components/Admin/Toturial/Add";
 
 
 export default {
@@ -15,6 +16,9 @@ export default {
         },
         {
             path: '/details', component:details,
+        },
+        {
+            path: '/add', component:Add,
         },
 
     ]

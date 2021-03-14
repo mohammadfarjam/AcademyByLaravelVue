@@ -11,6 +11,8 @@ Vue.use(VueRouter);
 
 
 Vue.component('navbar', require('./components/Navbar.vue').default);
+Vue.component('sidebar', require('./components/Admin/Sidebar.vue').default);
+
 
 
 const app = new Vue({

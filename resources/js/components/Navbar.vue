@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
     data() {
@@ -56,9 +55,6 @@ export default {
         }
     },
     props : ['user_info'],
-
-
-
 }
 </script>
 
