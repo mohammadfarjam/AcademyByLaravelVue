@@ -13,7 +13,7 @@
 {{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
 {{--    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
 
-    <!-- Styles -->
+<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom_style.css') }}" rel="stylesheet">
 
@@ -24,18 +24,15 @@
 <body>
 <div id="app">
     <div class="container-fluid p-0 m-0">
-
-    @yield('content')
-    <router-view />
+        @yield('content')
+        <router-view/>
 
     </div>
-{{--    container--}}
+    {{--    container--}}
 
 </div>
 
 <!-- Scripts -->
-
-
 
 
 <script src="{{ asset('/js/app.js') }}" defer></script>

@@ -1,9 +1,8 @@
 <template>
     <div>
-        add toturial
+        ffff
     </div>
 </template>
-
 
 <script>
 export default {}

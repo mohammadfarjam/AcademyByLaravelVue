@@ -17,18 +17,13 @@ Route::prefix('/manager')->group(function () {
 
 
 
-
-
-
-
-
-
-
 Route::get('/{any}', function () {
     return view('index');
 })->where('any','.*');
 
 
 Route::get('/manager/{any}', function () {
-    return view('Admin.app');
+    return view('Admin.index');
 })->where('any','.*');
+
+
