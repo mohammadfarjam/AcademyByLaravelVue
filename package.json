@@ -1,7 +1,4 @@
-
 {
-
-
     "private": true,
     "scripts": {
         "dev": "npm run development",
@@ -29,6 +26,7 @@
     },
     "dependencies": {
         "cross-env": "^7.0.3",
+        "v-toaster": "^1.0.3",
         "vue-router": "^3.5.1"
     }
 }

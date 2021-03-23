@@ -6,7 +6,6 @@ import details from './components/Toturial_details';
 
 export default {
     mode: 'history',
-
     routes: [
         {
             path: '/', component: Home,

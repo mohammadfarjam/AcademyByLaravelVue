@@ -6,24 +6,17 @@ use App\Http\Controllers\Admin\HomeController;
 Auth::routes();
 
 
-Route::get('/', function () {
-    return view('index');
-});
-
-
-Route::prefix('/manager')->group(function () {
+Route::prefix('/adm')->group(function () {
     Route::get('/', [HomeController::class, 'index']);
+
+    Route::get('/{admin}', function () {
+        return view('Admin.layout.app');
+    })->where('admin','.*');
+
 });
 
 
 
-Route::get('/{any}', function () {
+Route::get('/{index}', function () {
     return view('index');
-})->where('any','.*');
-
-
-Route::get('/manager/{any}', function () {
-    return view('Admin.index');
-})->where('any','.*');
-
-
+})->where('index','.*');

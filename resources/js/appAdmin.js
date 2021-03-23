@@ -4,15 +4,21 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 import VueRouter from 'vue-router';
-import AdminRoutes from "./AdminRoutes";
+import routes from './routesAdmin';
+import Toaster from 'v-toaster';
+import 'v-toaster/dist/v-toaster.css';
+Vue.use(Toaster, {timeout: 5000});
 Vue.use(VueRouter);
 
 
-Vue.component('index', require('./components/Admin/Index.vue').default);
-Vue.component('add', require('./components/Admin/Toturial/Add.vue').default);
+
+
+Vue.component('dashboard', require('./components/Dashboard/Dashboard.vue').default);
+Vue.component('users-index', require('./components/Admin/users/Index.vue').default);
+
 
 
 const appAdmin = new Vue({
     el: '#appAdmin',
-    router : new VueRouter(AdminRoutes)
+    router : new VueRouter(routes)
 });
