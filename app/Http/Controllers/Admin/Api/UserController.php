@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,8 +17,10 @@ class UserController extends Controller
      */
     public function index()
     {
+
         $get_info_users=User::with('roles')->orderBy('id', 'DESC')->get();
          return response()->json($get_info_users,200);
+
     }
 
     /**
@@ -89,11 +92,21 @@ class UserController extends Controller
 
     public function add_user(Request $request)
     {
+
         $new_user=new User();
         $new_user->name=$request['user_name'];
         $new_user->email=$request['email'];
         $new_user->password=Hash::make($request['password']);
         $new_user->save();
+
+        $new_user->roles()->attach($request['role']);
+    }
+
+    public function get_roles()
+    {
+        $roles=Role::all();
+        return response()->json($roles,200);
+
     }
 
 }

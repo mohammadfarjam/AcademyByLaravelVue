@@ -5,10 +5,10 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">ردیف</th>
+                <th scope="col">نام کاربر</th>
+                <th scope="col">ایمیل</th>
+                <th scope="col">نقش کاربر</th>
             </tr>
             </thead>
             <tbody>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="modal-body">
 
-
+<form>
                         <div class="form-group">
                             <label>نام کاربری</label>
                             <input class="form-control" placeholder="نام کاربری" type="text" value="" v-model="form.user_name"  autocomplete="off" />
@@ -58,6 +58,17 @@
                         </div>
                         <!-- form-group-->
 
+
+    <div class="form-group">
+        <label> نقش کاربر</label>
+   <select class="form-group form-control" v-model="form.role" multiple>
+       <option value="">انتخاب نقش کاربر </option>
+       <option  v-for="role in info_roles"  :value="role.id">{{role.title}}</option>
+   </select>
+    </div>
+    <!-- form-group-->
+
+</form>
 
                     </div>
                     <div class="modal-footer">
@@ -81,12 +92,14 @@ export default {
     data() {
         return {
             info_users: [],
+            info_roles: [],
             open_modal: false,
 
             form: {
                 user_name: "",
                 email: '',
                 password: '',
+                role:[],
 
             }
 
@@ -104,6 +117,11 @@ export default {
 
         modal_add_user() {
             this.open_modal = true;
+            axios.get('/api/get_roles').then(response => {
+                this.info_roles = (response.data);
+            }).catch((error) => {
+                    console.log(error)
+            });
         },
 
         close_modal() {
@@ -113,10 +131,11 @@ export default {
 
         add_user(){
             axios.post('/api/add_user',this.form).then(response => {
-                // console.log(response);
+                console.log(response);
                 if (response.status === 200){
                     this.open_modal = false;
                     this.$toaster.success('کاربر با موفقیت ایجاد شد.');
+                    this.getUser();
                 }
                 else{
                     this.open_modal = false;
@@ -135,6 +154,7 @@ export default {
 
     mounted() {
         this.getUser()
-    }
+    },
+
 }
 </script>

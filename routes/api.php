@@ -10,4 +10,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('get_info_users',[UserController::class,'index']);
+Route::get('get_roles',[UserController::class,'get_roles']);
 Route::post('add_user',[UserController::class,'add_user']);
