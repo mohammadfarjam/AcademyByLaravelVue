@@ -62,7 +62,6 @@
     <div class="form-group">
         <label> نقش کاربر</label>
    <select class="form-group form-control" v-model="form.role" multiple>
-       <option value="">انتخاب نقش کاربر </option>
        <option  v-for="role in info_roles"  :value="role.id">{{role.title}}</option>
    </select>
     </div>
@@ -131,7 +130,6 @@ export default {
 
         add_user(){
             axios.post('/api/add_user',this.form).then(response => {
-                console.log(response);
                 if (response.status === 200){
                     this.open_modal = false;
                     this.$toaster.success('کاربر با موفقیت ایجاد شد.');
@@ -142,10 +140,9 @@ export default {
                     this.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
                 }
             }).catch((error) => {
+                console.log(error)
                 this.open_modal = false;
                 this.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
-
-
             });
         }
 

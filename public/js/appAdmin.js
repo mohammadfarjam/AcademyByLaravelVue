@@ -1933,7 +1933,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -1976,8 +1975,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/add_user', this.form).then(function (response) {
-        console.log(response);
-
         if (response.status === 200) {
           _this3.open_modal = false;
 
@@ -1990,6 +1987,7 @@ __webpack_require__.r(__webpack_exports__);
           _this3.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
         }
       })["catch"](function (error) {
+        console.log(error);
         _this3.open_modal = false;
 
         _this3.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
@@ -2102,7 +2100,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2145,8 +2142,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/add_user', this.form).then(function (response) {
-        console.log(response);
-
         if (response.status === 200) {
           _this3.open_modal = false;
 
@@ -2159,6 +2154,7 @@ __webpack_require__.r(__webpack_exports__);
           _this3.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
         }
       })["catch"](function (error) {
+        console.log(error);
         _this3.open_modal = false;
 
         _this3.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
@@ -38503,20 +38499,14 @@ var render = function() {
                               }
                             }
                           },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("انتخاب نقش کاربر ")
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(_vm.info_roles, function(role) {
-                              return _c(
-                                "option",
-                                { domProps: { value: role.id } },
-                                [_vm._v(_vm._s(role.title))]
-                              )
-                            })
-                          ],
-                          2
+                          _vm._l(_vm.info_roles, function(role) {
+                            return _c(
+                              "option",
+                              { domProps: { value: role.id } },
+                              [_vm._v(_vm._s(role.title))]
+                            )
+                          }),
+                          0
                         )
                       ])
                     ])
@@ -38828,20 +38818,14 @@ var render = function() {
                               }
                             }
                           },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("انتخاب نقش کاربر ")
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(_vm.info_roles, function(role) {
-                              return _c(
-                                "option",
-                                { domProps: { value: role.id } },
-                                [_vm._v(_vm._s(role.title))]
-                              )
-                            })
-                          ],
-                          2
+                          _vm._l(_vm.info_roles, function(role) {
+                            return _c(
+                              "option",
+                              { domProps: { value: role.id } },
+                              [_vm._v(_vm._s(role.title))]
+                            )
+                          }),
+                          0
                         )
                       ])
                     ])

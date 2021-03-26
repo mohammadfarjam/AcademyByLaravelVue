@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -93,6 +94,17 @@ class UserController extends Controller
     public function add_user(Request $request)
     {
 
+        $validator = Validator::make($request->all(), [
+            'name'=>'required|string',
+            'email'=>'required|string|email|unique:users',
+            'password'=>'required|min:8',
+            'role'=>'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator,200);
+        } else {
+
         $new_user=new User();
         $new_user->name=$request['user_name'];
         $new_user->email=$request['email'];
@@ -100,6 +112,7 @@ class UserController extends Controller
         $new_user->save();
 
         $new_user->roles()->attach($request['role']);
+    }
     }
 
     public function get_roles()
