@@ -1933,6 +1933,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -1940,8 +1945,9 @@ __webpack_require__.r(__webpack_exports__);
       info_users: [],
       info_roles: [],
       open_modal: false,
+      error_form_validate: [],
       form: {
-        user_name: "",
+        name: '',
         email: '',
         password: '',
         role: []
@@ -1975,6 +1981,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/add_user', this.form).then(function (response) {
+        // console.log(response)
         if (response.status === 200) {
           _this3.open_modal = false;
 
@@ -1987,8 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
           _this3.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
         }
       })["catch"](function (error) {
-        console.log(error);
-        _this3.open_modal = false;
+        _this3.error_form_validate = error.response.data;
 
         _this3.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
       });
@@ -2100,6 +2106,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2107,8 +2118,9 @@ __webpack_require__.r(__webpack_exports__);
       info_users: [],
       info_roles: [],
       open_modal: false,
+      error_form_validate: [],
       form: {
-        user_name: "",
+        name: '',
         email: '',
         password: '',
         role: []
@@ -2142,6 +2154,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/add_user', this.form).then(function (response) {
+        // console.log(response)
         if (response.status === 200) {
           _this3.open_modal = false;
 
@@ -2154,8 +2167,7 @@ __webpack_require__.r(__webpack_exports__);
           _this3.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
         }
       })["catch"](function (error) {
-        console.log(error);
-        _this3.open_modal = false;
+        _this3.error_form_validate = error.response.data;
 
         _this3.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
       });
@@ -38363,152 +38375,198 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("form", [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("نام کاربری")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.user_name,
-                              expression: "form.user_name"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            placeholder: "نام کاربری",
-                            type: "text",
-                            value: "",
-                            autocomplete: "off"
-                          },
-                          domProps: { value: _vm.form.user_name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "user_name",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("ایمیل")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.email,
-                              expression: "form.email"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            name: "email",
-                            placeholder: "ایمیل",
-                            autocomplete: "off"
-                          },
-                          domProps: { value: _vm.form.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "email", $event.target.value)
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("رمز عبور")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.password,
-                              expression: "form.password"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            placeholder: "********",
-                            type: "password",
-                            name: "email",
-                            id: "password"
-                          },
-                          domProps: { value: _vm.form.password },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "password",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v(" نقش کاربر")]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("نام کاربری")]),
+                          _vm._v(" "),
+                          _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.role,
-                                expression: "form.role"
+                                value: _vm.form.name,
+                                expression: "form.name"
                               }
                             ],
-                            staticClass: "form-group form-control",
-                            attrs: { multiple: "" },
+                            staticClass: "form-control",
+                            attrs: {
+                              name: "text",
+                              placeholder: "نام کاربری",
+                              autocomplete: "off"
+                            },
+                            domProps: { value: _vm.form.name },
                             on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "name", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._l(_vm.error_form_validate.name, function(key) {
+                            return _c("div", {
+                              staticClass: "error",
+                              domProps: { innerHTML: _vm._s(key) }
+                            })
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("ایمیل")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.email,
+                                expression: "form.email"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              name: "email",
+                              placeholder: "ایمیل",
+                              autocomplete: "off"
+                            },
+                            domProps: { value: _vm.form.email },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "email", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._l(_vm.error_form_validate.email, function(key) {
+                            return _c("div", {
+                              staticClass: "error",
+                              domProps: { innerHTML: _vm._s(key) }
+                            })
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("رمز عبور")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.password,
+                                expression: "form.password"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              placeholder: "********",
+                              type: "password",
+                              name: "password",
+                              id: "password"
+                            },
+                            domProps: { value: _vm.form.password },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
                                 _vm.$set(
                                   _vm.form,
-                                  "role",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
+                                  "password",
+                                  $event.target.value
                                 )
                               }
                             }
-                          },
-                          _vm._l(_vm.info_roles, function(role) {
-                            return _c(
-                              "option",
-                              { domProps: { value: role.id } },
-                              [_vm._v(_vm._s(role.title))]
-                            )
                           }),
-                          0
-                        )
-                      ])
+                          _vm._v(" "),
+                          _vm._l(_vm.error_form_validate.password, function(
+                            key
+                          ) {
+                            return _c("div", {
+                              staticClass: "error",
+                              domProps: { innerHTML: _vm._s(key) }
+                            })
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v(" نقش کاربر")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.role,
+                                  expression: "form.role"
+                                }
+                              ],
+                              staticClass: "form-group form-control",
+                              attrs: { multiple: "" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "role",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.info_roles, function(role) {
+                              return _c(
+                                "option",
+                                { domProps: { value: role.id } },
+                                [_vm._v(_vm._s(role.title))]
+                              )
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.error_form_validate.role, function(key) {
+                            return _c("div", {
+                              staticClass: "error",
+                              domProps: { innerHTML: _vm._s(key) }
+                            })
+                          })
+                        ],
+                        2
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -38682,152 +38740,198 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("form", [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("نام کاربری")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.user_name,
-                              expression: "form.user_name"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            placeholder: "نام کاربری",
-                            type: "text",
-                            value: "",
-                            autocomplete: "off"
-                          },
-                          domProps: { value: _vm.form.user_name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "user_name",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("ایمیل")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.email,
-                              expression: "form.email"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            name: "email",
-                            placeholder: "ایمیل",
-                            autocomplete: "off"
-                          },
-                          domProps: { value: _vm.form.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "email", $event.target.value)
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v("رمز عبور")]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.password,
-                              expression: "form.password"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            placeholder: "********",
-                            type: "password",
-                            name: "email",
-                            id: "password"
-                          },
-                          domProps: { value: _vm.form.password },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "password",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [_vm._v(" نقش کاربر")]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("نام کاربری")]),
+                          _vm._v(" "),
+                          _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.role,
-                                expression: "form.role"
+                                value: _vm.form.name,
+                                expression: "form.name"
                               }
                             ],
-                            staticClass: "form-group form-control",
-                            attrs: { multiple: "" },
+                            staticClass: "form-control",
+                            attrs: {
+                              name: "text",
+                              placeholder: "نام کاربری",
+                              autocomplete: "off"
+                            },
+                            domProps: { value: _vm.form.name },
                             on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "name", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._l(_vm.error_form_validate.name, function(key) {
+                            return _c("div", {
+                              staticClass: "error",
+                              domProps: { innerHTML: _vm._s(key) }
+                            })
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("ایمیل")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.email,
+                                expression: "form.email"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              name: "email",
+                              placeholder: "ایمیل",
+                              autocomplete: "off"
+                            },
+                            domProps: { value: _vm.form.email },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "email", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._l(_vm.error_form_validate.email, function(key) {
+                            return _c("div", {
+                              staticClass: "error",
+                              domProps: { innerHTML: _vm._s(key) }
+                            })
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v("رمز عبور")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.password,
+                                expression: "form.password"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              placeholder: "********",
+                              type: "password",
+                              name: "password",
+                              id: "password"
+                            },
+                            domProps: { value: _vm.form.password },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
                                 _vm.$set(
                                   _vm.form,
-                                  "role",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
+                                  "password",
+                                  $event.target.value
                                 )
                               }
                             }
-                          },
-                          _vm._l(_vm.info_roles, function(role) {
-                            return _c(
-                              "option",
-                              { domProps: { value: role.id } },
-                              [_vm._v(_vm._s(role.title))]
-                            )
                           }),
-                          0
-                        )
-                      ])
+                          _vm._v(" "),
+                          _vm._l(_vm.error_form_validate.password, function(
+                            key
+                          ) {
+                            return _c("div", {
+                              staticClass: "error",
+                              domProps: { innerHTML: _vm._s(key) }
+                            })
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", [_vm._v(" نقش کاربر")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.role,
+                                  expression: "form.role"
+                                }
+                              ],
+                              staticClass: "form-group form-control",
+                              attrs: { multiple: "" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "role",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.info_roles, function(role) {
+                              return _c(
+                                "option",
+                                { domProps: { value: role.id } },
+                                [_vm._v(_vm._s(role.title))]
+                              )
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.error_form_validate.role, function(key) {
+                            return _c("div", {
+                              staticClass: "error",
+                              domProps: { innerHTML: _vm._s(key) }
+                            })
+                          })
+                        ],
+                        2
+                      )
                     ])
                   ]),
                   _vm._v(" "),

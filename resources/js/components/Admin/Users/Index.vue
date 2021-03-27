@@ -40,7 +40,8 @@
 <form>
                         <div class="form-group">
                             <label>نام کاربری</label>
-                            <input class="form-control" placeholder="نام کاربری" type="text" value="" v-model="form.user_name"  autocomplete="off" />
+                            <input class="form-control" name="text" placeholder="نام کاربری" v-model="form.name" autocomplete="off" />
+                            <div class="error" v-for="key in error_form_validate.name" v-html="key"></div>
                         </div>
                         <!--form-group-->
 
@@ -48,13 +49,15 @@
                         <div class="form-group">
                             <label>ایمیل</label>
                             <input class="form-control" name="email" placeholder="ایمیل" v-model="form.email" autocomplete="off" />
+                            <div class="error" v-for="key in error_form_validate.email" v-html="key"></div>
                         </div>
                         <!--form-group-->
 
 
                         <div class="form-group">
                             <label>رمز عبور</label>
-                            <input class="form-control" placeholder="********" type="password" name="email" v-model="form.password"  id="password"/>
+                            <input class="form-control" placeholder="********" type="password" name="password" v-model="form.password"  id="password"/>
+                            <div class="error" v-for="key in error_form_validate.password" v-html="key"></div>
                         </div>
                         <!-- form-group-->
 
@@ -64,6 +67,8 @@
    <select class="form-group form-control" v-model="form.role" multiple>
        <option  v-for="role in info_roles"  :value="role.id">{{role.title}}</option>
    </select>
+        <div class="error" v-for="key in error_form_validate.role" v-html="key"></div>
+
     </div>
     <!-- form-group-->
 
@@ -93,13 +98,13 @@ export default {
             info_users: [],
             info_roles: [],
             open_modal: false,
+            error_form_validate:[],
 
             form: {
-                user_name: "",
+                name: '',
                 email: '',
                 password: '',
                 role:[],
-
             }
 
         }
@@ -130,18 +135,17 @@ export default {
 
         add_user(){
             axios.post('/api/add_user',this.form).then(response => {
+                // console.log(response)
                 if (response.status === 200){
                     this.open_modal = false;
                     this.$toaster.success('کاربر با موفقیت ایجاد شد.');
                     this.getUser();
-                }
-                else{
+                }else{
                     this.open_modal = false;
                     this.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
                 }
             }).catch((error) => {
-                console.log(error)
-                this.open_modal = false;
+                this.error_form_validate=error.response.data;
                 this.$toaster.error('ثبت کاربر با خطا مواجه شده است.');
             });
         }

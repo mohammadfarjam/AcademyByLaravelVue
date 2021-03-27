@@ -99,14 +99,22 @@ class UserController extends Controller
             'email'=>'required|string|email|unique:users',
             'password'=>'required|min:8',
             'role'=>'required'
+        ],[
+            'name.required'=>'لطفا نام کاربری خود را وارد نمایید.',
+            'password.required'=>'لطفا رمز عبور خود را وارد نمایید.',
+            'password.min'=>'رمز عبور باید بیش از 8 کاراکتر باشد.',
+            'email.required'=>'ایمیل خود را وارد نمایید.',
+            'email.email'=>'ایمیل خود را صحیح وارد نمایید.',
+            'email.unique'=>'آدرس ایمیل قبلا ثبت شده است.',
+            'role.required'=>'نقش کاربر را انتخاب نمایید',
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator,200);
+            return response($validator->errors(), 401);
         } else {
 
         $new_user=new User();
-        $new_user->name=$request['user_name'];
+        $new_user->name=$request['name'];
         $new_user->email=$request['email'];
         $new_user->password=Hash::make($request['password']);
         $new_user->save();
