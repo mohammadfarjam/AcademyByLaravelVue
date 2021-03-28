@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class ToturialController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class ToturialController extends Controller
      */
     public function index()
     {
-
+       $posts=Post::all();
+       return response()->json($posts,200);
     }
 
     /**
@@ -35,7 +37,14 @@ class ToturialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_post= new Post();
+        $new_post->title=$request['title'];
+        $new_post->price=$request['price'];
+        $new_post->discount=$request['discount'];
+        $new_post->path_img=$request['photo_name'];
+        $new_post->description=$request['description'];
+        $new_post->save();
+
     }
 
     /**

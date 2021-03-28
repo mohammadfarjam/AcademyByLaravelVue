@@ -86,16 +86,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <router-link to="/index_tutorial" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>آموزش ها</p>
-                                    </a>
+                                    </router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <router-link to="/add_tutorial" class="nav-link">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>افزودن اموزش</p>
-                                    </a>
+                                        <p>افزودن آموزش</p>
+                                    </router-link>
                                 </li>
                             </ul>
                         </li>
