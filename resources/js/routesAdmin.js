@@ -2,6 +2,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import UsersIndex from "./components/Admin/Users/Index";
 import Add from "./components/Admin/Tutorial/Add";
 import Index from "./components/Admin/Tutorial/Index";
+import Edit from "./components/Admin/Tutorial/Edit";
 
 
 
@@ -20,6 +21,9 @@ export default {
         },
         {
             path: '/index_tutorial', component: Index,
+        },
+        {
+            path: '/edit_tutorial', component: Edit,name:'edit_tutorial'
         },
 
     ]
