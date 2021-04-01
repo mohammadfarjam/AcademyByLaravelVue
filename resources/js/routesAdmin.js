@@ -23,7 +23,7 @@ export default {
             path: '/index_tutorial', component: Index,
         },
         {
-            path: '/edit_tutorial', component: Edit,name:'edit_tutorial'
+            path: '/edit_tutorial', component: Edit,name:'edit_tutorial',props:true
         },
 
     ]

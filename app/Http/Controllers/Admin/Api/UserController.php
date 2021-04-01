@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -129,5 +130,7 @@ class UserController extends Controller
         return response()->json($roles,200);
 
     }
+
+
 
 }

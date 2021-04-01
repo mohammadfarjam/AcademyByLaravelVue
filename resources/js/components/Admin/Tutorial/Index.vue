@@ -16,11 +16,13 @@
                 <td scope="row">{{ index + 1 }}</td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.price }}</td>
-                <td v-if="post.description.length < 50 ">{{post.description}}</td>
-                <td v-else>{{post.description.substring(0,80)+"..."}}</td>
-                <td>{{ moment(post.created_at).locale('fa').format('jYYYY/jM/jD')}}</td>
+                <td v-if="post.description.length < 50 ">{{ post.description }}</td>
+                <td v-else>{{ post.description.substring(0, 80) + "..." }}</td>
+                <td>{{ moment(post.created_at).locale('fa').format('jYYYY/jM/jD') }}</td>
                 <td class="d-flex">
-                    <button class="btn btn-primary" @click.prevent="edit">ویرایش</button>
+                  <!-- <router-link :to="{ name: 'edit_tutorial'}" > -->
+                  <button class="btn btn-primary" @click.prevent="edit(post.id)">ویرایش</button>
+                    <!-- </router-link> -->
                     <button class="btn btn-danger">حذف</button>
                 </td>
             </tr>
@@ -43,25 +45,26 @@ export default {
     },
 
 
-    methods:{
+    methods: {
         getPosts() {
             axios.get('/api/post').then(response => {
-                this.info_posts= (response.data);
+                this.info_posts = (response.data);
             }).catch((error) => {
                 console.log(error)
 
             });
         },
 
-        edit(){
-            this.$router.push({ name: "edit_tutorial"})
+
+        edit(id){
+           this.$router.push({ name: 'edit_tutorial'});
+            localStorage.id=id
         }
     },
 
 
     mounted() {
         this.getPosts();
-
     },
 
 }

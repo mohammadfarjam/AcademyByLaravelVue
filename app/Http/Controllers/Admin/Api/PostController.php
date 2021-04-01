@@ -55,7 +55,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        return $info_edit=Post::findorfail($id);
+
     }
 
     /**
@@ -66,7 +68,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -78,7 +80,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $request;
     }
 
     /**
