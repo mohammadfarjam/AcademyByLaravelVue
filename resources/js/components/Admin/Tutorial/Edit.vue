@@ -47,7 +47,7 @@
         ></vue-dropzone>
         
         <img :src="'/storage/photos/'+info_edit.path_img" alt="" class="img-fluid" />
-         <input type="text" v-model="info_edit.path_img"/>
+         <input type="hidden" v-model="info_edit.path_img"/>
         <button class="btn btn-warning" @click.prevent="edit">ویرایش</button>
     </div>
 </template>
@@ -69,20 +69,22 @@ export default {
                 price: "",
                 discount: "",
                 description: "",
+                path_img:"",
             },
+
             info_edit:[],
 
             dropzoneOptions: {
                 url: "/api/upload_photos",
-                type: "get",
-                maxFilesize: 0.5,
+                type: "json",
+                maxFilesize: 1,
             },
         };
     },
     methods: {
         async afterUploadComplete(response) {
             if (response.status === "success") {
-                this.form.photo_name = response.upload.filename;
+                this.info_edit.path_img = response.upload.filename;
             } else {
                 console.log("uploaded failed");
             }
@@ -102,7 +104,15 @@ export default {
 
         edit(){
             axios.put("/api/post/"+localStorage.id,this.info_edit).then(response =>{
-                console.log(response.data)
+                if(response.data === ""){
+                     this.$router.push({ name: 'index_tutorial'});
+                     setTimeout(()=>{
+                      this.$toaster.success('مطلب با موفقیت ویرایش شد.');
+                      localStorage.clear();
+                     },1500)
+                }else{
+                     this.$toaster.error('خطا در ویرایش مطلب  ');
+                }
             }).catch((error)=>{
                 console.log(error)
             })

@@ -12,8 +12,9 @@ import MomentJalali from 'moment-jalaali';
 
 Vue.use(Toaster, {timeout: 5000});
 Vue.use(VueRouter);
-
 Vue.use(MomentJalali);
+
+
 
 
 

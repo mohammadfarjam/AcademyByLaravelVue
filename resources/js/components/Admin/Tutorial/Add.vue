@@ -73,7 +73,7 @@ export default {
                 url: "/api/upload_photos",
                 type: "get",
                 thumbnailWidth: 150,
-                maxFilesize: 0.5,
+                maxFilesize: 1,
             },
         };
     },
@@ -87,10 +87,15 @@ export default {
         },
 
         add_post() {
-            axios
-                .post("/api/post", this.form)
-                .then((response) => {
-                    console.log(response);
+            axios.post("/api/post", this.form).then((response) => {
+                     if(response.data === ""){
+                     this.$router.push({ name: 'index_tutorial'});
+                     setTimeout(()=>{
+                      this.$toaster.success('مطلب جدید ایجاد شد.');
+                     },1500)
+                }else{
+                     this.$toaster.error('خطا در ایجاد مطلب  ');
+                }
                 })
                 .catch((error) => {
                     console.log(error.response);
