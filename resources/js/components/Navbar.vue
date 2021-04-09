@@ -16,7 +16,9 @@
                     </li>
                 </ul>
 
-
+                <router-link to="/checkout">
+                    <i style="color: #fff;font-size: 25px;margin:10px 20px;" class="fas fa-shopping-bag"></i>
+                </router-link>
                 <div v-if="user_info" class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ user_info.name }}
@@ -55,6 +57,8 @@ export default {
         }
     },
     props : ['user_info'],
+
+
 }
 </script>
 

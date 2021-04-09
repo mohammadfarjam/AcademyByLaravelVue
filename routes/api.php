@@ -19,3 +19,4 @@ Route::apiResource('post',PostController::class);
 // Frontend
 Route::get('/get_new_products',[HomeController::class,'get_new_products']);
 Route::get('/details_products/{slug}',[HomeController::class,'details_products']);
+Route::get('/get_info_to_add_basket/{id}',[HomeController::class,'get_info_to_add_basket']);

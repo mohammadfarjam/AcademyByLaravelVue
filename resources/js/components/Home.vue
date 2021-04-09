@@ -16,7 +16,7 @@
                     <p class="text-success mb-3">{{ post.price }} </p>
                     </span>
 
-                <a href="#" class="btn btn-primary add_card">افزودن به سبد خرید</a>
+                <p class="btn btn-primary add_card" @click.prevent="add_to_basket(post.id)">افزودن به سبد خرید</p>
             </div>
         </div>
     </div>
@@ -24,20 +24,28 @@
 </template>
 
 <script>
+import Checkout from "./Checkout";
 export default {
+    components: {Checkout},
     data() {
         return {
             new_products: [],
         }
     },
     methods: {
-        get_new_products() {
-            axios.get('/api/get_new_products').then(response => {
+       async get_new_products() {
+           try {
+            const response= await axios.get('/api/get_new_products');
                 this.new_products = response.data;
-            }).catch((error) => {
-                console.log(error)
-            });
+            } catch (error) {
+            console.log(error);
         }
+        },
+
+        add_to_basket(id){
+            localStorage.id_toturial = id;
+        }
+
     },
     mounted() {
         this.get_new_products()

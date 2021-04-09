@@ -31,4 +31,18 @@ class HomeController extends Controller
         }
 
     }
+
+
+
+    public function get_info_to_add_basket(Request $request)
+    {
+
+        try {
+            $info_toturial=Post::findOrFail($request['id']);
+            return response()->json($info_toturial,200);
+        }catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+    }
 }

@@ -88,7 +88,7 @@ export default {
             });
         }
     },
-    created() {
+    mounted() {
         this.details_products()
     },
 
