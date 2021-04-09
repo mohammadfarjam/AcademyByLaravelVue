@@ -2012,8 +2012,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -2075,21 +2073,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     vueDropzone: (vue2_dropzone__WEBPACK_IMPORTED_MODULE_1___default())
   },
   data: function data() {
-    var _ref;
-
-    return _ref = {
+    return {
       info_edit: {
         title: "",
         price: "",
         discount: "",
         description: "",
         path_img: ""
+      },
+      dropzoneOptions: {
+        url: "/api/upload_photos",
+        type: "json",
+        maxFilesize: 1
       }
-    }, _defineProperty(_ref, "info_edit", []), _defineProperty(_ref, "dropzoneOptions", {
-      url: "/api/upload_photos",
-      type: "json",
-      maxFilesize: 1
-    }), _ref;
+    };
   },
   methods: {
     afterUploadComplete: function afterUploadComplete(response) {
@@ -62792,7 +62789,7 @@ var render = function() {
       _vm._v(" "),
       _c("img", {
         staticClass: "img-fluid",
-        attrs: { src: "/storage/photos/" + _vm.info_edit.path_img, alt: "" }
+        attrs: { src: "/storage/photos/" + _vm.info_edit.image, alt: "" }
       }),
       _vm._v(" "),
       _c("input", {
@@ -62800,18 +62797,18 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.info_edit.path_img,
-            expression: "info_edit.path_img"
+            value: _vm.info_edit.image,
+            expression: "info_edit.image"
           }
         ],
         attrs: { type: "hidden" },
-        domProps: { value: _vm.info_edit.path_img },
+        domProps: { value: _vm.info_edit.image },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.$set(_vm.info_edit, "path_img", $event.target.value)
+            _vm.$set(_vm.info_edit, "image", $event.target.value)
           }
         }
       }),

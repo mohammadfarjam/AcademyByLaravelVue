@@ -14,7 +14,7 @@ export default {
             path: '/about', component: About,
         },
         {
-            path: '/details', component:details,
+            path: '/details/:slug', component:details,name:'details',props:true
         },
 
     ]

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -21,7 +22,7 @@ class PostController extends Controller
          }catch (\Exception $e) {
             return 'error';
          }
-      
+
     }
 
     /**
@@ -42,17 +43,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+//        return Auth::id();
         try{
         $new_post= new Post();
         $new_post->title=$request['title'];
+        $new_post->user_id=Auth::check() ? Auth::id() : true;;
         $new_post->price=$request['price'];
         $new_post->discount=$request['discount'];
-        $new_post->path_img=$request['photo_name'];
+        $new_post->image=$request['photo_name'];
         $new_post->description=$request['description'];
         $new_post->save();
     } catch (\Exception $e) {
-
-        return $e->getMessage();
+            return $e->getMessage();
     }
     }
 
@@ -64,7 +66,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        
+
         return $info_edit=Post::findorfail($id);
 
     }
@@ -96,7 +98,7 @@ class PostController extends Controller
             $find_post->price=$request['price'];
             $find_post->discount=$request['discount'];
             $find_post->description=$request['description'];
-            $find_post->path_img=$request['path_img'];
+            $find_post->image=$request['image'];
 
             $find_post->save();
 

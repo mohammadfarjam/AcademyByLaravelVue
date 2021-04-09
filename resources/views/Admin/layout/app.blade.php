@@ -22,7 +22,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="/Admin/dist/css/bootstrap-rtl.min.css">
     <!-- template rtl version -->
     <link rel="stylesheet" href="/Admin/dist/css/custom-style.css">
-
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="hold-transition sidebar-mini p-0">
 <div class="wrapper" id="appAdmin">
@@ -80,7 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-dashboard"></i>
                                 <p>
-                                     آموزش
+                                    آموزش
                                     <i class="right fa fa-angle-left"></i>
                                 </p>
                             </a>
@@ -107,6 +108,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <p>کاربران
                                 </p>
                             </router-link>
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <i class="nav-icon fa fa-off"></i>
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">
+                                <p>خروج</p>
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf
+                            </form>
+
                         </li>
 
                     </ul>

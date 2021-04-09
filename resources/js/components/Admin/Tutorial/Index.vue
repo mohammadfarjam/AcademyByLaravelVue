@@ -72,7 +72,6 @@ export default {
             console.log("data");
             this.info_posts = response.data;
             this.loading = false;
-
           }
           
 

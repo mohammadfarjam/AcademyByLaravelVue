@@ -47,7 +47,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function post()
+    public function posts()
     {
         return $this->belongsToMany(Post::class);
     }

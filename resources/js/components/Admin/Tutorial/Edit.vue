@@ -45,9 +45,9 @@
             :options="dropzoneOptions"
             @vdropzone-complete="afterUploadComplete"
         ></vue-dropzone>
-        
-        <img :src="'/storage/photos/'+info_edit.path_img" alt="" class="img-fluid" />
-         <input type="hidden" v-model="info_edit.path_img"/>
+
+        <img :src="'/storage/photos/'+info_edit.image" alt="" class="img-fluid" />
+         <input type="hidden" v-model="info_edit.image"/>
         <button class="btn btn-warning" @click.prevent="edit">ویرایش</button>
     </div>
 </template>
@@ -72,7 +72,7 @@ export default {
                 path_img:"",
             },
 
-            info_edit:[],
+
 
             dropzoneOptions: {
                 url: "/api/upload_photos",
