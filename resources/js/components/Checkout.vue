@@ -7,18 +7,19 @@
 <ul style="list-style-type: none;">
     <li class="mb-4">
         <div class="d-flex flex-row">
-            <!-- <img :src="'/storage/photos/'" class="img-fluid" alt="" width="100" height="100"/> -->
+             <img :src="'/storage/photos/'+infos.image" class="img-fluid" alt="" width="160" height="30"/>
             <div style="width: 100%">
-        <p class="m-0 pr-4 w-100" style="font-size: 16px"></p>
+        <p class="m-0 pr-4 w-100" style="font-size: 16px">{{ infos }}</p>
         <p class="m-0 pr-4 w-100" style="font-size: 11px">مدرس : محمد فرجام</p>
-                  <p style="float: left;direction: ltr;text-align: left;font-size: 20px" class="pl-5 mt-4">تومان</p>
+                  <p style="float: left;direction: ltr;text-align: left;font-size: 20px"
+                     class="pl-5 mt-4">{{infos.price }}تومان</p>
                 <button class="mr-4 mt-3 btn btn-outline-danger"><i class="ml-2 far fa-trash-alt"></i>حذف</button>
         </div>
         </div>
     </li>
 </ul>
 </span>
-</div>
+    </div>
 </template>
 
 <script>
@@ -27,25 +28,25 @@ export default {
     data() {
         return {
             infos:[],
-            id:[],
+            // ids: [],
+            // result: [],
+
         }
     },
 
     methods: {
-        async get_info_to_add_basket() {
-            try {
-                const response = await axios.get('/api/get_info_to_add_basket/'+this.id);
-                // this.infos=response.data;
-                console.log(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        },
+
     },
 
     mounted() {
-        this.get_info_to_add_basket();
-       this.id=sessionStorage.getItem('id_add_to_basket');
+        this.infos=localStorage.add_to_basket;
+        // this.result = this.ids;
+        // this.result = this.result.split("");
+        // let value = ",";
+        // this.result = this.result.filter(function (item) {
+        //     return item !== value
+        // });
+        console.log(this.infos)
     }
 }
 </script>

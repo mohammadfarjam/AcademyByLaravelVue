@@ -30,7 +30,7 @@ export default {
         return {
             new_products: [],
             ids:[],
-           
+
         }
     },
     methods: {
@@ -43,15 +43,21 @@ export default {
         }
         },
 
-        add_to_basket(id){
-            this.ids.push(id);
-        console.log(JSON.stringify(this.ids))
-        sessionStorage.setItem('id_add_to_basket',this.ids)
-        }
+        async add_to_basket(id){
+                try {
+                    const response = await axios.get('/api/get_info_to_add_basket/'+id);
+                    localStorage.add_to_basket=response.data;
+                    console.log(response.data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
 
     },
+
+
     mounted() {
-        this.get_new_products()    
+        this.get_new_products()
     },
 
 }

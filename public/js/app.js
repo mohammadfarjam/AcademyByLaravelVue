@@ -1877,14 +1877,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+//
 //
 //
 //
@@ -1911,48 +1904,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      infos: [],
-      id: []
+      infos: [] // ids: [],
+      // result: [],
+
     };
   },
-  methods: {
-    get_info_to_add_basket: function get_info_to_add_basket() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return axios.get('/api/get_info_to_add_basket/' + _this.id);
-
-              case 3:
-                response = _context.sent;
-                // this.infos=response.data;
-                console.log(response.data);
-                _context.next = 10;
-                break;
-
-              case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](0);
-                console.log(_context.t0);
-
-              case 10:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[0, 7]]);
-      }))();
-    }
-  },
+  methods: {},
   mounted: function mounted() {
-    this.get_info_to_add_basket();
-    this.id = sessionStorage.getItem('id_add_to_basket');
+    this.infos = localStorage.add_to_basket; // this.result = this.ids;
+    // this.result = this.result.split("");
+    // let value = ",";
+    // this.result = this.result.filter(function (item) {
+    //     return item !== value
+    // });
+
+    console.log(this.infos);
   }
 });
 
@@ -2045,9 +2011,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     add_to_basket: function add_to_basket(id) {
-      this.ids.push(id);
-      console.log(JSON.stringify(this.ids));
-      sessionStorage.setItem('id_add_to_basket', this.ids);
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios.get('/api/get_info_to_add_basket/' + id);
+
+              case 3:
+                response = _context2.sent;
+                localStorage.add_to_basket = response.data;
+                console.log(response.data);
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8]]);
+      }))();
     }
   },
   mounted: function mounted() {
@@ -61578,79 +61570,89 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass: "mx-auto mt-5",
+      staticStyle: {
+        width: "50%",
+        height: "50%",
+        border: "1px solid",
+        "border-radius": "35px",
+        "text-align": "right",
+        direction: "rtl"
+      }
+    },
+    [
+      _c("p", { staticClass: "p-4", staticStyle: { "font-size": "25px" } }, [
+        _vm._v("سبد خرید من ")
+      ]),
+      _vm._v(" "),
+      _c("span", [
+        _c("ul", { staticStyle: { "list-style-type": "none" } }, [
+          _c("li", { staticClass: "mb-4" }, [
+            _c("div", { staticClass: "d-flex flex-row" }, [
+              _c("img", {
+                staticClass: "img-fluid",
+                attrs: {
+                  src: "/storage/photos/" + _vm.infos.image,
+                  alt: "",
+                  width: "160",
+                  height: "30"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticStyle: { width: "100%" } }, [
+                _c(
+                  "p",
+                  {
+                    staticClass: "m-0 pr-4 w-100",
+                    staticStyle: { "font-size": "16px" }
+                  },
+                  [_vm._v(_vm._s(_vm.infos))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "m-0 pr-4 w-100",
+                    staticStyle: { "font-size": "11px" }
+                  },
+                  [_vm._v("مدرس : محمد فرجام")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "pl-5 mt-4",
+                    staticStyle: {
+                      float: "left",
+                      direction: "ltr",
+                      "text-align": "left",
+                      "font-size": "20px"
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.infos.price) + "تومان")]
+                ),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "mx-auto mt-5",
-        staticStyle: {
-          width: "50%",
-          height: "50%",
-          border: "1px solid",
-          "border-radius": "35px",
-          "text-align": "right",
-          direction: "rtl"
-        }
-      },
-      [
-        _c("p", { staticClass: "p-4", staticStyle: { "font-size": "25px" } }, [
-          _vm._v("سبد خرید من ")
-        ]),
-        _vm._v(" "),
-        _c("span", [
-          _c("ul", { staticStyle: { "list-style-type": "none" } }, [
-            _c("li", { staticClass: "mb-4" }, [
-              _c("div", { staticClass: "d-flex flex-row" }, [
-                _c("div", { staticStyle: { width: "100%" } }, [
-                  _c("p", {
-                    staticClass: "m-0 pr-4 w-100",
-                    staticStyle: { "font-size": "16px" }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      staticClass: "m-0 pr-4 w-100",
-                      staticStyle: { "font-size": "11px" }
-                    },
-                    [_vm._v("مدرس : محمد فرجام")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      staticClass: "pl-5 mt-4",
-                      staticStyle: {
-                        float: "left",
-                        direction: "ltr",
-                        "text-align": "left",
-                        "font-size": "20px"
-                      }
-                    },
-                    [_vm._v("تومان")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    { staticClass: "mr-4 mt-3 btn btn-outline-danger" },
-                    [
-                      _c("i", { staticClass: "ml-2 far fa-trash-alt" }),
-                      _vm._v("حذف")
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
+    return _c("button", { staticClass: "mr-4 mt-3 btn btn-outline-danger" }, [
+      _c("i", { staticClass: "ml-2 far fa-trash-alt" }),
+      _vm._v("حذف")
+    ])
   }
 ]
 render._withStripped = true

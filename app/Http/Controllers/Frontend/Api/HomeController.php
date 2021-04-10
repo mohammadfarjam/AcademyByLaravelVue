@@ -36,14 +36,9 @@ class HomeController extends Controller
 
     public function get_info_to_add_basket(Request $request)
     {
-        // $ids=$request['id'];
-        //     foreach($ids as $id){
-               
-        
-        //     }
-            
+
             try {
-                $infos=Post::findOrFail(6);
+                $infos=Post::findOrFail($request['id']);
                 return response()->json($infos,200);
             }catch (\Exception $e) {
                 return $e->getMessage();
