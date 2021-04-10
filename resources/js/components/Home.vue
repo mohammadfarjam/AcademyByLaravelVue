@@ -3,9 +3,9 @@
 
     <div class="row d-flex flex-row justify-content-center mt-4">
 
-        <div v-for="post in new_products" class="card col-lg-3 col-md-4 col-sm-12 m-2 p-0"
+        <div v-for="post in new_products" :key="post.id" class="card col-lg-3 col-md-4 col-sm-12 m-2 p-0"
              style="border: none;max-width:350px;">
-            <router-link :to="{name:'details',params:{slug:post.slug }}" >
+            <router-link :to="{name:'details',params:{slug:post.slug }}">
                 <img class="card-img-top" :src="'/storage/photos/'+post.image" alt="images/learn_js.jpg">
             </router-link>
             <div class="card-body text-right" style="position: relative">
@@ -24,12 +24,13 @@
 </template>
 
 <script>
-import Checkout from "./Checkout";
+import NavbarVue from './Navbar.vue';
 export default {
-    components: {Checkout},
     data() {
         return {
             new_products: [],
+            ids:[],
+           
         }
     },
     methods: {
@@ -43,12 +44,14 @@ export default {
         },
 
         add_to_basket(id){
-            localStorage.id_toturial = id;
+            this.ids.push(id);
+        console.log(JSON.stringify(this.ids))
+        sessionStorage.setItem('id_add_to_basket',this.ids)
         }
 
     },
     mounted() {
-        this.get_new_products()
+        this.get_new_products()    
     },
 
 }
