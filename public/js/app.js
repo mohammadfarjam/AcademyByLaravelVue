@@ -1901,24 +1901,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      infos: [] // ids: [],
-      // result: [],
-
+      infos: '',
+      total_price: ''
     };
   },
   methods: {},
   mounted: function mounted() {
-    this.infos = localStorage.add_to_basket; // this.result = this.ids;
-    // this.result = this.result.split("");
-    // let value = ",";
-    // this.result = this.result.filter(function (item) {
-    //     return item !== value
-    // });
-
-    console.log(this.infos);
+    this.infos = JSON.parse(localStorage.getItem('add_to_basket'));
+  },
+  computed: {
+    sumTotal: function sumTotal() {
+      var basket_total = 0;
+      this.infos[0].forEach(function (val) {
+        basket_total += Number(val.price);
+      });
+      console.log(basket_total);
+    }
   }
 });
 
@@ -1974,7 +1994,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       new_products: [],
-      ids: []
+      datas: []
     };
   },
   methods: {
@@ -2011,6 +2031,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     add_to_basket: function add_to_basket(id) {
+      var _this2 = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -2023,8 +2045,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 response = _context2.sent;
-                localStorage.add_to_basket = response.data;
-                console.log(response.data);
+
+                _this2.datas.push(response.data);
+
+                localStorage.add_to_basket = JSON.stringify(_this2.datas);
                 _context2.next = 11;
                 break;
 
@@ -61570,79 +61594,106 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "mx-auto mt-5",
-      staticStyle: {
-        width: "50%",
-        height: "50%",
-        border: "1px solid",
-        "border-radius": "35px",
-        "text-align": "right",
-        direction: "rtl"
-      }
-    },
-    [
-      _c("p", { staticClass: "p-4", staticStyle: { "font-size": "25px" } }, [
-        _vm._v("سبد خرید من ")
-      ]),
-      _vm._v(" "),
-      _c("span", [
-        _c("ul", { staticStyle: { "list-style-type": "none" } }, [
-          _c("li", { staticClass: "mb-4" }, [
-            _c("div", { staticClass: "d-flex flex-row" }, [
-              _c("img", {
-                staticClass: "img-fluid",
-                attrs: {
-                  src: "/storage/photos/" + _vm.infos.image,
-                  alt: "",
-                  width: "160",
-                  height: "30"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticStyle: { width: "100%" } }, [
-                _c(
-                  "p",
-                  {
-                    staticClass: "m-0 pr-4 w-100",
-                    staticStyle: { "font-size": "16px" }
-                  },
-                  [_vm._v(_vm._s(_vm.infos))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  {
-                    staticClass: "m-0 pr-4 w-100",
-                    staticStyle: { "font-size": "11px" }
-                  },
-                  [_vm._v("مدرس : محمد فرجام")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  {
-                    staticClass: "pl-5 mt-4",
-                    staticStyle: {
-                      float: "left",
-                      direction: "ltr",
-                      "text-align": "left",
-                      "font-size": "20px"
-                    }
-                  },
-                  [_vm._v(_vm._s(_vm.infos.price) + "تومان")]
-                ),
-                _vm._v(" "),
-                _vm._m(0)
-              ])
-            ])
-          ])
+  return _c("div", { staticClass: "row mt-5 mb-5 justify-content-center" }, [
+    _c(
+      "div",
+      {
+        staticClass: "mr-3",
+        staticStyle: {
+          border: "1px solid",
+          "border-radius": "35px",
+          "text-align": "right",
+          direction: "rtl"
+        }
+      },
+      [
+        _c("p", { staticClass: "p-4", staticStyle: { "font-size": "17px" } }, [
+          _vm._v("مبلغ قابل پرداخت " + _vm._s(_vm.sumTotal) + " تومان")
+        ]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn btn-warning mx-auto" }, [
+          _vm._v("ادامه فرایند خرید")
         ])
-      ])
-    ]
-  )
+      ]
+    ),
+    _vm._v("\r\n\r\n    " + _vm._s(_vm.total_price) + "\r\n\r\n "),
+    _c(
+      "div",
+      {
+        staticClass: "ml-3",
+        staticStyle: {
+          border: "1px solid",
+          "border-radius": "35px",
+          "text-align": "right",
+          direction: "rtl"
+        }
+      },
+      [
+        _c("p", { staticClass: "p-4", staticStyle: { "font-size": "25px" } }, [
+          _vm._v("سبد خرید من ")
+        ]),
+        _vm._v(" "),
+        _c("span", [
+          _c(
+            "ul",
+            { staticStyle: { "list-style-type": "none" } },
+            _vm._l(_vm.infos, function(info) {
+              return _c("li", { key: info.id, staticClass: "mb-4" }, [
+                _c("div", { staticClass: "d-flex flex-row" }, [
+                  _c("img", {
+                    staticClass: "img-fluid",
+                    attrs: {
+                      src: "/storage/photos/" + info[0].image,
+                      alt: "",
+                      width: "160",
+                      height: "30"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticStyle: { width: "100%" } }, [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "m-0 pr-4 w-100",
+                        staticStyle: { "font-size": "16px" }
+                      },
+                      [_vm._v(_vm._s(info[0].title))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        staticClass: "m-0 pr-4 w-100",
+                        staticStyle: { "font-size": "11px" }
+                      },
+                      [_vm._v("مدرس : محمد فرجام")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        staticClass: "pl-5 mt-4",
+                        staticStyle: {
+                          float: "left",
+                          direction: "ltr",
+                          "text-align": "left",
+                          "font-size": "20px"
+                        }
+                      },
+                      [_vm._v(_vm._s(info[0].price) + "تومان")]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(0, true)
+                  ])
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {

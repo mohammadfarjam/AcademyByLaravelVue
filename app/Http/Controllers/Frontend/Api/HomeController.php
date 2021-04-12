@@ -38,7 +38,7 @@ class HomeController extends Controller
     {
 
             try {
-                $infos=Post::findOrFail($request['id']);
+                $infos=Post::where('id',$request['id'])->get();
                 return response()->json($infos,200);
             }catch (\Exception $e) {
                 return $e->getMessage();

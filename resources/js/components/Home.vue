@@ -29,7 +29,7 @@ export default {
     data() {
         return {
             new_products: [],
-            ids:[],
+            datas:[],
 
         }
     },
@@ -46,8 +46,9 @@ export default {
         async add_to_basket(id){
                 try {
                     const response = await axios.get('/api/get_info_to_add_basket/'+id);
-                    localStorage.add_to_basket=response.data;
-                    console.log(response.data);
+                     this.datas.push(response.data);
+                    localStorage.add_to_basket=JSON.stringify(this.datas);
+
                 } catch (error) {
                     console.log(error);
                 }
