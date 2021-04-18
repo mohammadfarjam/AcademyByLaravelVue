@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -43,5 +44,20 @@ class HomeController extends Controller
             }catch (\Exception $e) {
                 return $e->getMessage();
             }
+        }
+
+
+    public function home_pdf()
+    {
+        $info_pdfs=Post::all();
+        return view('homePdf',compact('info_pdfs'));
+
+        }
+
+    public function export_pdf()
+    {
+        $info_pdfs=Post::all();
+         $export_pdf= PDF::loadView('exportPdf',compact('info_pdfs'));
+         return $export_pdf->download('report.pdf');
         }
 }

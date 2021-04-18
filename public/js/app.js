@@ -1917,9 +1917,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1927,18 +1924,24 @@ __webpack_require__.r(__webpack_exports__);
       total_price: ''
     };
   },
-  methods: {},
+  methods: {
+    delete_product: function delete_product(id) {
+      localStorage.removeItem(id);
+    }
+  },
   mounted: function mounted() {
     this.infos = JSON.parse(localStorage.getItem('add_to_basket'));
-  },
-  computed: {
-    sumTotal: function sumTotal() {
-      var basket_total = 0;
-      this.infos[0].forEach(function (val) {
-        basket_total += Number(val.price);
-      });
-      console.log(basket_total);
+    var prices = [];
+    $.each(this.infos, function (key, value) {
+      prices.push(value[0].price);
+    });
+    var sum = 0;
+
+    for (var i = 0; i < prices.length; i++) {
+      sum += prices[i];
     }
+
+    this.total_price = sum;
   }
 });
 
@@ -61608,7 +61611,7 @@ var render = function() {
       },
       [
         _c("p", { staticClass: "p-4", staticStyle: { "font-size": "17px" } }, [
-          _vm._v("مبلغ قابل پرداخت " + _vm._s(_vm.sumTotal) + " تومان")
+          _vm._v("مبلغ قابل پرداخت " + _vm._s(_vm.total_price) + " تومان")
         ]),
         _vm._v(" "),
         _c("button", { staticClass: "btn btn-warning mx-auto" }, [
@@ -61616,7 +61619,7 @@ var render = function() {
         ])
       ]
     ),
-    _vm._v("\r\n\r\n    " + _vm._s(_vm.total_price) + "\r\n\r\n "),
+    _vm._v(" "),
     _c(
       "div",
       {
@@ -61683,7 +61686,22 @@ var render = function() {
                       [_vm._v(_vm._s(info[0].price) + "تومان")]
                     ),
                     _vm._v(" "),
-                    _vm._m(0, true)
+                    _c(
+                      "button",
+                      {
+                        staticClass: "mr-4 mt-3 btn btn-outline-danger",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.delete_product(info[0].id)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "ml-2 far fa-trash-alt" }),
+                        _vm._v("حذف")
+                      ]
+                    )
                   ])
                 ])
               ])
@@ -61695,17 +61713,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "mr-4 mt-3 btn btn-outline-danger" }, [
-      _c("i", { staticClass: "ml-2 far fa-trash-alt" }),
-      _vm._v("حذف")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
