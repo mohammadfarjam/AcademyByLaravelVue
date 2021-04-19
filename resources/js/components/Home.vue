@@ -47,7 +47,21 @@ export default {
                 try {
                     const response = await axios.get('/api/get_info_to_add_basket/'+id);
                      this.datas.push(response.data);
-                    localStorage.add_to_basket=JSON.stringify(this.datas);
+
+                    for (let i=0; i < this.datas.length; i++){
+                        console.log(this.datas[i][0].id)
+                        if (this.datas[i][0].id !== id ){
+                            this.datas.splice(this.datas[i][0].id,1);
+
+
+                         }else {
+                            console.log('not equl')
+                            localStorage.add_to_basket=JSON.stringify(this.datas);
+
+
+
+                        }
+                     }
 
                 } catch (error) {
                     console.log(error);

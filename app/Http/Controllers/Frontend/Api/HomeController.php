@@ -45,19 +45,4 @@ class HomeController extends Controller
                 return $e->getMessage();
             }
         }
-
-
-    public function home_pdf()
-    {
-        $info_pdfs=Post::all();
-        return view('homePdf',compact('info_pdfs'));
-
-        }
-
-    public function export_pdf()
-    {
-        $info_pdfs=Post::all();
-         $export_pdf= PDF::loadView('exportPdf',compact('info_pdfs'));
-         return $export_pdf->download('report.pdf');
-        }
 }

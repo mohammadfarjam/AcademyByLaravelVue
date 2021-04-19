@@ -7209,7 +7209,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.loader[data-v-79f5c60c] {\n  border: 5px solid #f3f3f3; /* Light grey */\n  border-top: 5px solid #3498db; /* Blue */\n  border-radius: 50%;\n  width: 40px;\n  height: 40px;\n  -webkit-animation: spin-data-v-79f5c60c 2s linear infinite;\n          animation: spin-data-v-79f5c60c 2s linear infinite;\n  margin:0 auto;\n}\n@-webkit-keyframes spin-data-v-79f5c60c {\n0% { transform: rotate(0deg);\n}\n100% { transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-79f5c60c {\n0% { transform: rotate(0deg);\n}\n100% { transform: rotate(360deg);\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.loader[data-v-79f5c60c] {\r\n  border: 5px solid #f3f3f3; /* Light grey */\r\n  border-top: 5px solid #3498db; /* Blue */\r\n  border-radius: 50%;\r\n  width: 40px;\r\n  height: 40px;\r\n  -webkit-animation: spin-data-v-79f5c60c 2s linear infinite;\r\n          animation: spin-data-v-79f5c60c 2s linear infinite;\r\n  margin:0 auto;\n}\n@-webkit-keyframes spin-data-v-79f5c60c {\n0% { transform: rotate(0deg);\n}\n100% { transform: rotate(360deg);\n}\n}\n@keyframes spin-data-v-79f5c60c {\n0% { transform: rotate(0deg);\n}\n100% { transform: rotate(360deg);\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

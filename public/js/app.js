@@ -1925,8 +1925,29 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    delete_product: function delete_product(id) {
-      localStorage.removeItem(id);
+    delete_product: function delete_product(key) {
+      var _this = this;
+
+      for (var i = 0; i <= this.infos.length; i++) {
+        if (i === key) {
+          (function () {
+            _this.infos.splice(i, 1);
+
+            localStorage.add_to_basket = JSON.stringify(_this.infos);
+            var prices = [];
+            $.each(_this.infos, function (key, value) {
+              prices.push(value[0].price);
+            });
+            var sum = 0;
+
+            for (var _i = 0; _i < prices.length; _i++) {
+              sum += prices[_i];
+            }
+
+            _this.total_price = sum;
+          })();
+        }
+      }
     }
   },
   mounted: function mounted() {
@@ -2037,7 +2058,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var response;
+        var response, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -2051,7 +2072,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this2.datas.push(response.data);
 
-                localStorage.add_to_basket = JSON.stringify(_this2.datas);
+                for (i = 0; i < _this2.datas.length; i++) {
+                  console.log(_this2.datas[i][0].id);
+
+                  if (_this2.datas[i][0].id !== id) {
+                    _this2.datas.splice(_this2.datas[i][0].id, 1);
+                  } else {
+                    console.log('not equl');
+                    localStorage.add_to_basket = JSON.stringify(_this2.datas);
+                  }
+                }
+
                 _context2.next = 11;
                 break;
 
@@ -61640,7 +61671,7 @@ var render = function() {
           _c(
             "ul",
             { staticStyle: { "list-style-type": "none" } },
-            _vm._l(_vm.infos, function(info) {
+            _vm._l(_vm.infos, function(info, key) {
               return _c("li", { key: info.id, staticClass: "mb-4" }, [
                 _c("div", { staticClass: "d-flex flex-row" }, [
                   _c("img", {
@@ -61693,7 +61724,7 @@ var render = function() {
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            return _vm.delete_product(info[0].id)
+                            return _vm.delete_product(key)
                           }
                         }
                       },

@@ -13,7 +13,7 @@
 
             <span>
 <ul style="list-style-type: none;">
-    <li class="mb-4" v-for="info in infos" :key="info.id">
+    <li class="mb-4" v-for="(info,key) in infos" :key="info.id">
         <div class="d-flex flex-row">
                       <img :src="'/storage/photos/'+info[0].image" class="img-fluid" alt="" width="160" height="30"/>
             <div style="width: 100%">
@@ -21,7 +21,7 @@
         <p class="m-0 pr-4 w-100" style="font-size: 11px">مدرس : محمد فرجام</p>
                   <p style="float: left;direction: ltr;text-align: left;font-size: 20px"
                      class="pl-5 mt-4">{{ info[0].price }}تومان</p>
-                <button class="mr-4 mt-3 btn btn-outline-danger" @click.prevent="delete_product(info[0].id)"><i class="ml-2 far fa-trash-alt"></i>حذف</button>
+                <button class="mr-4 mt-3 btn btn-outline-danger" @click.prevent="delete_product(key)"><i class="ml-2 far fa-trash-alt"></i>حذف</button>
         </div>
         </div>
 
@@ -50,8 +50,24 @@ export default {
     },
 
     methods: {
-        delete_product(id){
-            localStorage.removeItem(id);
+        delete_product(key) {
+            for (let i = 0; i <= this.infos.length; i++) {
+                if (i === key) {
+                        this.infos.splice(i,1);
+                        localStorage.add_to_basket=JSON.stringify(this.infos);
+                    let prices = [];
+                    $.each(this.infos, function (key, value) {
+                        prices.push(value[0].price);
+                    });
+
+                    let sum = 0;
+                    for (let i = 0; i < prices.length; i++) {
+                        sum += prices[i];
+                    }
+                    this.total_price = sum;
+
+                }
+                }
         }
     },
 
