@@ -43,18 +43,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-//        return Auth::id();
-        try{
+        try {
         $new_post= new Post();
         $new_post->title=$request['title'];
-        $new_post->user_id=Auth::check() ? Auth::id() : true;;
+        $new_post->user_id= Auth::check() ? Auth::id() : true;
         $new_post->price=$request['price'];
         $new_post->discount=$request['discount'];
         $new_post->image=$request['photo_name'];
         $new_post->description=$request['description'];
         $new_post->save();
     } catch (\Exception $e) {
-            return $e->getMessage();
+
+        return $e->getMessage();
     }
     }
 

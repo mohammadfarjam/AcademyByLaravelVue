@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Frontend\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

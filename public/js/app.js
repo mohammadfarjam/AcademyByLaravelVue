@@ -2013,12 +2013,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       new_products: [],
-      datas: []
+      datas: [],
+      arrId: [],
+      filterId: []
     };
   },
   methods: {
@@ -2033,7 +2044,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios.get('/api/get_new_products');
+                return axios.get("/api/get_new_products");
 
               case 3:
                 response = _context.sent;
@@ -2058,45 +2069,62 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var response, i;
+        var i, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return axios.get('/api/get_info_to_add_basket/' + id);
+                _this2.arrId.push(id);
+
+                _this2.filterId = Array.from(new Set(_this2.arrId));
+                i = 0;
 
               case 3:
+                if (!(i < _this2.filterId.length)) {
+                  _context2.next = 22;
+                  break;
+                }
+
+                console.log(_this2.filterId[i]);
+
+                if (!(_this2.filterId.length > 0 && id === _this2.filterId[i])) {
+                  _context2.next = 19;
+                  break;
+                }
+
+                _context2.prev = 6;
+                _context2.next = 9;
+                return axios.get("/api/get_info_to_add_basket/" + id);
+
+              case 9:
                 response = _context2.sent;
 
                 _this2.datas.push(response.data);
 
-                for (i = 0; i < _this2.datas.length; i++) {
-                  console.log(_this2.datas[i][0].id);
-
-                  if (_this2.datas[i][0].id !== id) {
-                    _this2.datas.splice(_this2.datas[i][0].id, 1);
-                  } else {
-                    console.log('not equl');
-                    localStorage.add_to_basket = JSON.stringify(_this2.datas);
-                  }
-                }
-
-                _context2.next = 11;
+                localStorage.add_to_basket = JSON.stringify(_this2.datas);
+                _context2.next = 17;
                 break;
 
-              case 8:
-                _context2.prev = 8;
-                _context2.t0 = _context2["catch"](0);
+              case 14:
+                _context2.prev = 14;
+                _context2.t0 = _context2["catch"](6);
                 console.log(_context2.t0);
 
-              case 11:
+              case 17:
+                _context2.next = 19;
+                break;
+
+              case 19:
+                i++;
+                _context2.next = 3;
+                break;
+
+              case 22:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 8]]);
+        }, _callee2, null, [[6, 14]]);
       }))();
     }
   },
@@ -61810,12 +61838,12 @@ var render = function() {
                 "span",
                 { staticClass: "d-flex flex-row justify-content-end" },
                 [
-                  _c("p", { staticClass: "text-success mb-3 " }, [
+                  _c("p", { staticClass: "text-success mb-3" }, [
                     _vm._v("تومان")
                   ]),
                   _vm._v(" "),
                   _c("p", { staticClass: "text-success mb-3" }, [
-                    _vm._v(_vm._s(post.price) + " ")
+                    _vm._v(_vm._s(post.price))
                   ])
                 ]
               ),
@@ -61831,7 +61859,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("افزودن به سبد خرید")]
+                [_vm._v("\n        افزودن به سبد خرید\n      ")]
               )
             ]
           )
