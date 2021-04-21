@@ -53,37 +53,34 @@ export default {
       }
     },
 
-    async add_to_basket(id) {
-      this.arrId.push(id);
-        
-      this.filterId = Array.from(new Set(this.arrId));
- 
-    for(let i=0; i < this.filterId.length;i++){
-        console.log(this.filterId[i])
-        if(this.filterId.length > 0 && id === this.filterId[i] ){
-             try {
-          const response = await axios.get("/api/get_info_to_add_basket/" + id);
-          this.datas.push(response.data);
-          localStorage.add_to_basket = JSON.stringify(this.datas);
+    add_to_basket(id) {
+      
+      if (this.datas.length !== 0) {
+        $.each(this.datas, function (key, value) {
+          console.log(value[0].id);
+          if (value[0].id !== id) {
+            try {
+              axios
+                .get("/api/get_info_to_add_basket/" + id)
+                .then((response) => {
+                  this.datas.push(response.data);
+                  localStorage.add_to_basket = JSON.stringify(this.datas);
+                });
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        });
+      } else {
+        try {
+          axios.get("/api/get_info_to_add_basket/" + id).then((response) => {
+            this.datas.push(response.data);
+            localStorage.add_to_basket = JSON.stringify(this.datas);
+          });
         } catch (error) {
           console.log(error);
         }
-    
-        }else{
-              
-            }
-            
-
-    }
-      
-    // if($.inArray(id, filterId) !== -1){
-    //      console.log("exist");
-          
-    //   } else {
-    //      
-       
-         
-    //   }
+      }
     },
   },
 
