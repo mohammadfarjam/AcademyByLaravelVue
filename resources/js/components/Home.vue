@@ -39,8 +39,7 @@ export default {
     return {
       new_products: [],
       datas: [],
-      arrId: [],
-      filterId: [],
+      products:[],
     };
   },
   methods: {
@@ -53,34 +52,18 @@ export default {
       }
     },
 
-    add_to_basket(id) {
+    async add_to_basket(id) {
       
-      if (this.datas.length !== 0) {
-        $.each(this.datas, function (key, value) {
-          console.log(value[0].id);
-          if (value[0].id !== id) {
-            try {
-              axios
-                .get("/api/get_info_to_add_basket/" + id)
-                .then((response) => {
-                  this.datas.push(response.data);
-                  localStorage.add_to_basket = JSON.stringify(this.datas);
-                });
-            } catch (error) {
-              console.log(error);
-            }
-          }
-        });
-      } else {
         try {
-          axios.get("/api/get_info_to_add_basket/" + id).then((response) => {
-            this.datas.push(response.data);
-            localStorage.add_to_basket = JSON.stringify(this.datas);
-          });
+          const response = await axios.get("/api/get_info_to_add_basket/" + id);
+          this.datas.push(response.data);
+           
+                  // localStorage.add_to_basket = JSON.stringify(Remove_duplicate_Value);
+           
         } catch (error) {
           console.log(error);
         }
-      }
+
     },
   },
 

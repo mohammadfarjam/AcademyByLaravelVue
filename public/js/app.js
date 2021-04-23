@@ -2028,8 +2028,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       new_products: [],
       datas: [],
-      arrId: [],
-      filterId: []
+      products: []
     };
   },
   methods: {
@@ -2066,37 +2065,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     add_to_basket: function add_to_basket(id) {
-      var _this3 = this;
+      var _this2 = this;
 
-      if (this.datas.length !== 0) {
-        $.each(this.datas, function (key, value) {
-          var _this2 = this;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios.get("/api/get_info_to_add_basket/" + id);
 
-          console.log(value[0].id);
+              case 3:
+                response = _context2.sent;
 
-          if (value[0].id !== id) {
-            try {
-              axios.get("/api/get_info_to_add_basket/" + id).then(function (response) {
-                _this2.datas.push(response.data);
+                _this2.datas.push(response.data); // localStorage.add_to_basket = JSON.stringify(Remove_duplicate_Value);
 
-                localStorage.add_to_basket = JSON.stringify(_this2.datas);
-              });
-            } catch (error) {
-              console.log(error);
+
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0);
+
+              case 10:
+              case "end":
+                return _context2.stop();
             }
           }
-        });
-      } else {
-        try {
-          axios.get("/api/get_info_to_add_basket/" + id).then(function (response) {
-            _this3.datas.push(response.data);
-
-            localStorage.add_to_basket = JSON.stringify(_this3.datas);
-          });
-        } catch (error) {
-          console.log(error);
-        }
-      }
+        }, _callee2, null, [[0, 7]]);
+      }))();
     }
   },
   mounted: function mounted() {
